@@ -1,0 +1,43 @@
+<%= form_with model: @memo do |form| %>
+
+<div class="field">
+    <%= form.label :title %><br>
+  <%= form.text_field :title %>
+</div>
+<div class="field">
+     <%= form.label :body %><br>
+  <%= form.text_field :body %>
+</div>
+<div class="field">
+     <%= form.label :url %><br>
+  <%= form.text_field :url %>
+</div>
+<div class="actions">
+  <%= form.submit '編集' %>
+</div>
+
+<% end %>
+
+ <% @memos.each do |memo| %>
+  <ul>
+    <li>
+    タイトル：
+      <%= memo.title %>
+    </li>
+    <li>
+    内容：
+      <%= memo.body %>
+    </li>
+    <li>
+    URL：
+      <%= memo.url %>
+    </li>
+    <li>
+      <%= button_to '編集', "/memos/#{memo.id}/edit", method: :get %>
+    </li> 
+    <li>
+      <%= button_to "削除", "/memos/#{memo.id}", method: :delete %>
+    </li>
+  </ul>
+  <% end %>
+

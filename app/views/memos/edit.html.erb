@@ -1,0 +1,19 @@
+<%= form_with model: @memo do |form| %>
+
+<div class="field">
+    <%= form.label :title %><br>
+  <%= form.text_field :title %>
+</div>
+<div class="field">
+     <%= form.label :body %><br>
+  <%= form.text_field :body %>
+</div>
+<div class="field">
+     <%= form.label :url %><br>
+  <%= form.text_field :url %>
+</div>
+<div class="actions">
+  <%= form.submit '編集' %>
+</div>
+
+<% end %>
