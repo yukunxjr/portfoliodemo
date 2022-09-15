@@ -1,6 +1,7 @@
 class MemosController < ApplicationController
     def index
-        @memos = Memo.all
+        @memos = Memo.undiscarded
+        @del = Memo.discarded 
     end
 
     def edit
@@ -20,7 +21,13 @@ class MemosController < ApplicationController
 
     def destroy
         @memo = Memo.find(params[:id])
-        @memo.destroy
+        @memo.discard
+        redirect_to memos_path
+    end
+
+    def restoration
+        memo = Memo.find(params[:id])
+        memo.undiscard
         redirect_to memos_path
     end
 
@@ -32,4 +39,5 @@ class MemosController < ApplicationController
      def memo_params
         params.permit(:title, :body, :url)
      end
+
 end

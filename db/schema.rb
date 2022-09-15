@@ -23,9 +23,11 @@ ActiveRecord::Schema.define(version: 2022_09_13_101705) do
   create_table "memos", force: :cascade do |t|
     t.string "title"
     t.text "body"
+    t.datetime "discarded_at", precision: 6
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "url"
+    t.index ["discarded_at"], name: "index_posts_on_discarded_at"
   end
 
   create_table "skills", force: :cascade do |t|
