@@ -5,7 +5,7 @@
             <ul>
                 <li><%= link_to "メモ", memos_path %></li>
                 <li><%= link_to "タイマー", "#" %></li>
-                <li><%= link_to "学習時間入力", user_skills_path(current_user), method: :get %></li>
+                <li><%= link_to "学習時間入力", user_learning_items_path(current_user), method: :get %></li>
                 <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
                 <li><%= link_to "アカウント", edit_user_registration_path, method: :get %></li>
             </ul>
