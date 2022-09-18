@@ -1,7 +1,7 @@
 class MemosController < ApplicationController
     def index
-        @memos = Memo.undiscarded
-        @del = Memo.discarded 
+        @memos = Memo.undiscarded.where(id: current_user)
+        @del = Memo.discarded.where(id: current_user)
     end
 
     def edit

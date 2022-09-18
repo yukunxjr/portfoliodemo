@@ -1,32 +1,28 @@
 class LearningItemsController < ApplicationController
+    before_action :authenticate_user!, only: %i[create destroy]
 
     def index
-        @learningItem = LearningItem.where(user_id:params[:user_id])
-        @user = User.find(params[:user_id])
-        @learningItem.all
+        @learningItems = LearningItem.all
+        # where(user_id: current_user.id)
     end
 
-    def new
-        @learningItem = LearningItem.new
-        @user = User.find(params[:user_id])
-    end
-
+  
     def create
-        @user = User.find(params[:user_id])
-        @learningItem = LearningItem.new(learningItems_params)
-        @learningItem.save
-        redirect_to user_learning_items(current_user)
+      LearningItem.create(learningItem_params)
+      redirect_to learning_items_path
     end
-
+  
     def destroy
-        @learningItem = LearningItem.find(params[:id])
-        @user = User.find(params[:user_id])
+      @learningItem = LearningItem.find(params[:id])
+      if current_user.id == @learningItem.user_id
         @learningItem.destroy
+      end
+      redirect_to learning_items_path
     end
 
     private
+    def learningItem_params
+        params.permit(:name, :study_time, :user_id)
+    end
 
-        def learningItems_params
-            params.require(:learningItem).permit(:name, :study_time, :user_id)
-        end
 end

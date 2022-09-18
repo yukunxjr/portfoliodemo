@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_15_121110) do
+ActiveRecord::Schema.define(version: 2022_09_17_063709) do
 
   create_table "learning_items", force: :cascade do |t|
     t.string "name"
@@ -21,6 +21,14 @@ ActiveRecord::Schema.define(version: 2022_09_15_121110) do
     t.index ["user_id_id"], name: "index_learning_items_on_user_id_id"
   end
 
+  create_table "learns", force: :cascade do |t|
+    t.string "name"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_learns_on_user_id"
+  end
+
   create_table "memos", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -29,6 +37,15 @@ ActiveRecord::Schema.define(version: 2022_09_15_121110) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "url"
     t.index ["discarded_at"], name: "index_posts_on_discarded_at"
+  end
+
+  create_table "studies", force: :cascade do |t|
+    t.float "time"
+    t.date "date"
+    t.integer "learn_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["learn_id"], name: "index_studies_on_learn_id"
   end
 
   create_table "users", force: :cascade do |t|

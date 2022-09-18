@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  resources :users, only:['show'] do 
-    resources :learning_items, only:[:index, :create, :destroy, :new]
-  end
+  resources :users
+  
+  resources :learns
+  resources :studys
+  
 
   resources :memos, only:[:index, :create, :update, :destroy, :edit] 
 

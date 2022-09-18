@@ -1,0 +1,22 @@
+<%= form_with model: @learn do |form| %>
+
+<div class="field">
+    <%= form.label :name %><br>
+  <%= form.text_field :name %>
+</div>
+<div class="actions">
+  <%= form.submit '更新' %>
+</div>
+
+<% end %>
+
+<%= @learns.each do |t| %>
+<ul>
+    <li>
+    学習項目：
+      <%= t.name %>
+    </li>
+</ul>
+
+<% end %>
+
