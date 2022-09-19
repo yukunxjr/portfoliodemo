@@ -1,7 +1,7 @@
 class MemosController < ApplicationController
     def index
-        @memos = Memo.undiscarded.where(id: current_user)
-        @del = Memo.discarded.where(id: current_user)
+        @memos = Memo.undiscarded.where(user_id: current_user)
+        @del = Memo.discarded.where(user_id: current_user)
     end
 
     def edit
@@ -9,26 +9,29 @@ class MemosController < ApplicationController
     end
 
     def create
-        Memo.create(memo_params)
-        redirect_to memos_path
+        @memo = Memo.new(memo_params)
+        @memo.user_id = current_user.id
+        @memo.save
+        redirect_to user_memos_path
     end
 
     def update
         @memo = Memo.find(params[:id])
         @memo.update(create_memo_params)
-        redirect_to memos_path
+        redirect_to user_memos_path
     end
 
     def destroy
         @memo = Memo.find(params[:id])
         @memo.discard
-        redirect_to memos_path
+        redirect_to user_memos_path
     end
 
     def restoration
         memo = Memo.find(params[:id])
+        memo.user_id = current_user.id
         memo.undiscard
-        redirect_to memos_path
+        redirect_to user_memos_path
     end
 
     private

@@ -1,13 +1,18 @@
-<h2><%= @user.name %>さんのページ</h2>
+<h2><%= @user.name %>さんのページ</h2><br>
 
-
-<%= Study.all.sum(:time) %>
-
-
-<%= Learn.all.each do |learn| %>
 <p>
-    <%= learn.name %>
-    <%= Study.group(:learn_id).sum(:time)[learn.id] %>
+総学習時間：
+<%= Study.all.where(user_id: current_user).sum(:time) %>時間
+</p>
+
+<%= Learn.all.where(user_id: current_user).each do |learn| %>
+<p>
+    <%= learn.name %>：
+    <%= Study.group(:learn_id).sum(:time)[learn.id] %>時間
 </p>
 <% end %>
+
+
+
+
 

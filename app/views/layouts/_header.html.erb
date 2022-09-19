@@ -3,7 +3,7 @@
         <p class="header-left"><%= link_to "Habits", user_path(current_user) %></p>
         <nav class="header-right">
             <ul>
-                <li><%= link_to "メモ", memos_path %></li>
+                <li><%= link_to "メモ", user_memos_path(current_user) %></li>
                 <li><%= link_to "タイマー", "#" %></li>
                 <li><%= link_to "スキル", learns_path, method: :get %></li>
                 <li><%= link_to "学習時間入力", studys_path, method: :get %></li>

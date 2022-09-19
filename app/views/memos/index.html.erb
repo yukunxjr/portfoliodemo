@@ -34,11 +34,11 @@
       <%= memo.url %>
     </li>
     <li>
-      <%= button_to '編集', "/memos/#{memo.id}/edit", method: :get %>
+      <%= button_to '編集', "/users/#{current_user.id}/memos/#{memo.id}/edit", method: :get %>
     </li> 
     <li>
       <%# <%= button_to "削除", "/memos/#{memo.id}", method: :delete %> 
-      <%= button_to "削除", memo_path(memo.id), method: :delete %>
+      <%= button_to "削除", "/users/#{current_user.id}/memos/#{memo.id}", method: :delete %>
     </li>
   </ul>
   <% end %>
@@ -51,7 +51,7 @@
         <%= t.body %>
         <%= t.url %>
         <%= t.discarded? %>
-        <%= button_to "復元", controller:"memos", action:"restoration", id:t.id, method: :post %>
+        <%= button_to "復元","/users/#{current_user.id}/restoration/#{t.id}", method: :post %>
     </p>
 <% end %>
 
