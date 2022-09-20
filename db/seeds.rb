@@ -5,3 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+10.times do |n|
+    LevelSetting.create!(
+      level: 1 + n,
+      thresold: 100 * n
+    )
+  end

@@ -6,7 +6,6 @@ class StudysController < ApplicationController
       end
     
       def create
-        # @learn = Learn.find(learn_id: params[:learn_id])
         @study = Study.new(study_params)
         @study.user_id = current_user.id
         @study.save

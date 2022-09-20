@@ -12,7 +12,7 @@ class MemosController < ApplicationController
         @memo = Memo.new(memo_params)
         @memo.user_id = current_user.id
         @memo.save
-        redirect_to user_memos_path
+        redirect_to levelup_user_path(current_user.id)
     end
 
     def update

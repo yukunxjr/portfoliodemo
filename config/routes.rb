@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
 
+
   resources :users do
+    member do
+      get 'levelup'
+    end
     resources :memos, only:[:index, :create, :update, :destroy, :edit] 
     post 'restoration/:id' => 'memos#restoration'
   end

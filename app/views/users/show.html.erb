@@ -1,17 +1,30 @@
 <h2><%= @user.name %>さんのページ</h2><br>
+<p><%= @user.level %></p>
+<p><%= @user.exp %></p>
 
-<p>
-総学習時間：
-<%= Study.all.where(user_id: current_user).sum(:time) %>時間
-</p>
 
 <%= Learn.all.where(user_id: current_user).each do |learn| %>
 <p>
     <%= learn.name %>：
     <%= Study.group(:learn_id).sum(:time)[learn.id] %>時間
 </p>
+
 <% end %>
 
+<%# User.where(id: Post.group(:user_id).where(created_at: Time.current.all_month) %>
+
+<p>
+今週の勉強時間：
+<%= Study.where(created_at: Time.current.all_week).sum(:time) %>時間/週
+</p>
+<p>
+今月の勉強時間：
+<%= Study.where(created_at: Time.current.all_month).sum(:time) %>時間/月
+</p>
+<p>
+総学習時間：
+<%= Study.all.where(user_id: current_user).sum(:time) %>時間
+</p>
 
 
 

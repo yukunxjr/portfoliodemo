@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_18_025855) do
+ActiveRecord::Schema.define(version: 2022_09_20_031650) do
 
   create_table "learning_items", force: :cascade do |t|
     t.string "name"
@@ -29,6 +29,13 @@ ActiveRecord::Schema.define(version: 2022_09_18_025855) do
     t.index ["user_id"], name: "index_learns_on_user_id"
   end
 
+  create_table "level_settings", force: :cascade do |t|
+    t.integer "level"
+    t.integer "thresold"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "memos", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -37,6 +44,7 @@ ActiveRecord::Schema.define(version: 2022_09_18_025855) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "url"
     t.integer "user_id", null: false
+    t.integer "exp", default: 50
     t.index ["discarded_at"], name: "index_posts_on_discarded_at"
     t.index ["user_id"], name: "index_memos_on_user_id"
   end
@@ -61,6 +69,8 @@ ActiveRecord::Schema.define(version: 2022_09_18_025855) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
+    t.integer "level", default: 1
+    t.integer "exp", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
