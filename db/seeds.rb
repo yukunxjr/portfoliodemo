@@ -5,9 +5,20 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-10.times do |n|
+100.times do |n|
     LevelSetting.create!(
       level: 1 + n,
       thresold: 100 * n
+    )
+  end
+
+  30.times do |n|
+    User.create!(
+      email: "test#{n + 1}@test.com",
+      name: "テスト太郎#{n + 1}",
+      password: "test#{n + 1}test",
+      encrypted_password: "test#{n + 1}test",
+      level: "#{n + 1}",
+      exp: "#{n + 100}",
     )
   end

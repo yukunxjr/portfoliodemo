@@ -1,19 +1,25 @@
 class UsersController < ApplicationController
     before_action :authenticate_user!, only: [:show]
+
+    def index
+        @ranking = User.order(level: :desc).limit(5)
+        @studies = Study.sum(:time)
+        @my_rank = User.all.where(id: current_user.id)
+    end
+
     def show
         @user = User.find(params[:id])
     end
+
     def edit
-        @user = user.find(params[:id])
+        @user = User.find(params[:id])
     end
 
-    def levelup
+    def levelup_memo
         user = User.find(params[:id])
-        memo = Memo.find(params[:id])
       
-        totalExp = user.exp
+        totalExp = user.exp + 30
         #変数に現在のユーザーの経験値を入れる
-        totalExp += memo.exp
         # 得られた経験値をユーザーの経験値に加算
       
         user.exp = totalExp
@@ -30,6 +36,25 @@ class UsersController < ApplicationController
           user.level = user.level + 1
           user.update(level: user.level)
         #レベルを1増やして更新
+        end
+        redirect_back(fallback_location: user_path(current_user))
+      end
+
+      def levelup_study
+        user = User.find(params[:id])
+        # study = Study.find(params[:id])
+      
+        totalExp = user.exp + 100
+        # totalExp += study.exp
+      
+        user.exp = totalExp
+        user.update(exp: totalExp)
+      
+        levelSetting = LevelSetting.find_by(level: user.level + 1);
+      
+        if levelSetting.thresold <= user.exp
+          user.level = user.level + 1
+          user.update(level: user.level)
         end
         redirect_back(fallback_location: user_path(current_user))
       end

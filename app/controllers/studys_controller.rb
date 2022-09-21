@@ -8,8 +8,9 @@ class StudysController < ApplicationController
       def create
         @study = Study.new(study_params)
         @study.user_id = current_user.id
+        @study.exp = @study.time
         @study.save
-        redirect_to action: 'index'
+        redirect_to levelup_study_user_path(current_user.id)
       end
     
       private 

@@ -1,0 +1,26 @@
+
+<table>
+    <tr>
+      <th>順位</th>
+      <th>ユーザーレベル</th>
+      <th>ユーザーネーム</th>
+      <th>総学習時間</th>
+    </tr>
+    <% @ranking.each.with_index(1) do |user,rank| %>
+    <tr>
+      <td>第<%= rank %>位</td>
+      <td><%= user.level %></td>
+      <td><%= user.name %></td>
+      <td><%= @studies %></td>
+    </tr>
+    <% end %>
+    <% @my_rank.each do |my| %>
+    <tr>
+      <td><%= %>圏外</td>
+      <td><%= my.level %></td>
+      <td><%= my.name %></td>
+      <td><%= Study.all.where(user_id: current_user).sum(:time) %></td>
+    </tr>
+    <% end %>
+</table>
+

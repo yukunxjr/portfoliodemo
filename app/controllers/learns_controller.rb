@@ -8,13 +8,13 @@ class LearnsController < ApplicationController
         @learn = Learn.new(learn_params)
         @learn.user_id = current_user.id
         @learn.save
-        redirect_to learns_path
+        redirect_to user_learns_path
     end
 
     def destroy
         @learn = Learn.find(params[:id])
         @learn.destroy
-        redirect_to learns_path
+        redirect_to user_learns_path
     end
 
 

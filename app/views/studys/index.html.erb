@@ -1,15 +1,13 @@
 <div class="contents">
   <div class="input_time">
 
-<%= form_with model: @study, url: studys_path do |f| %>
+<%= form_with model: @study, url: user_studys_path do |f| %>
 
     <%= f.date_select :date %><br>
     <br>
-    <%# <%= f.select :learn_id, @learns.map { |learn| [learn.name, learn.id] } %>
-    <% @learns.each do |learn| %>
-    <%= f.text_field :learn_id, placeholder: "#{learn.id}" %>
-    <%= f.number_field :time, placeholder: "#{learn.name}", size: "40x5" %><br>
-    <% end %>
+    <%= f.select :learn_id, @learns.map { |learn| [learn.name, learn.id] } %>
+    <br>
+    <%= f.number_field :time, placeholder: "小数点第一位まで可！", size: "40x5" %><br>
     <br>
     <%= f.submit "送信",class: 'submit_btn' %>
 <% end %>
@@ -20,6 +18,5 @@
       <p>がんばったね！</p>
     </div>
   </div>
-
 
 
