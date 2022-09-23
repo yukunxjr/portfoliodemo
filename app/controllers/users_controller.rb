@@ -3,8 +3,8 @@ class UsersController < ApplicationController
 
     def index
         @ranking = User.order(level: :desc).limit(5)
-        @studies = Study.sum(:time)
-        @my_rank = User.all.where(id: current_user.id)
+        # @study = Study.group(:user_id).sum(:time)
+        # @my_rank = User.all.where(id: current_user.id)
     end
 
     def show

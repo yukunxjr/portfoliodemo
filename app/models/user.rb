@@ -5,4 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
   has_many :learns
+  has_many :studies
+
+
+  validates :name, presence: true
+
 end
